@@ -12,7 +12,7 @@ duration = 5
 # Start recorder with the given values 
 # of duration and sample frequency
 recording = sd.rec(int(duration * freq), 
-                   samplerate=freq, channels=2)
+                   samplerate=freq, channels=1)
  
 # Record audio for the given number of seconds
 sd.wait(5)
