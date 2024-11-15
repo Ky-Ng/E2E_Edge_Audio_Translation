@@ -23,3 +23,4 @@ sd.wait(5)
  
 # Convert the NumPy array to audio file
 wv.write("recording1.wav", recording, freq, sampwidth=2)
+import pdb; pdb.set_trace()
