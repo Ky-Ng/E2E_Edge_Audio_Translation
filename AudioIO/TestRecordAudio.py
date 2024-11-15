@@ -1,6 +1,6 @@
 # https://www.geeksforgeeks.org/create-a-voice-recorder-using-python/
 import sounddevice as sd
-from scipy.io.wavfile import write
+# from scipy.io.wavfile import write
 import wavio as wv
  
 # Sampling frequency
@@ -19,7 +19,7 @@ sd.wait(5)
  
 # This will convert the NumPy array to an audio
 # file with the given sampling frequency
-write("recording0.wav", freq, recording)
+# write("recording0.wav", freq, recording)
  
 # Convert the NumPy array to audio file
 wv.write("recording1.wav", recording, freq, sampwidth=2)
