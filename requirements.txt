@@ -1,0 +1,9 @@
+# Audio I/O
+wavio
+scipy
+sounddevice
+pydub
+
+# Models
+torch
+transformers
