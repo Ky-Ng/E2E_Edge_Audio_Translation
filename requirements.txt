@@ -8,3 +8,6 @@ pydub
 torch
 transformers
 datasets
+
+# TTS
+ChatTTS
