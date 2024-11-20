@@ -1,3 +1,4 @@
+from utils.BluetoothHandler import BluetoothHandler
 from utils.AudioHandler import AudioHandler
 from utils.Transcriber import Transcriber
 
@@ -12,6 +13,10 @@ def main():
     transcriber = Transcriber()
     transcription = transcriber.transcribe(file_name)
     print(transcription)
+
+    bluetooth_handler = BluetoothHandler()
+    bluetooth_handler.send(transcription)
+    print("Sent transcription", transcription)
     
 
 if __name__ == "__main__":
