@@ -4,6 +4,10 @@ scipy
 sounddevice
 pydub
 
+# Communication
+dbus-python
+bluedot
+
 # Models
 torch
 transformers
