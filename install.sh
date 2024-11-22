@@ -19,7 +19,7 @@ fi
 
 # Activate venv
 echo "Activating venv"
-source ./venv/bin/activate
+source .venv/bin/activate
 
 # Installing Python Requirements
 echo "Installing dependencies with $(which python)"
