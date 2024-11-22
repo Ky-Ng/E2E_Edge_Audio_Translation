@@ -21,6 +21,6 @@ class TtsHanlder:
 
     def save_waveform(self, fname: str, text: str) -> np.ndarray:
         wav = self.get_waveform(text)
-        wv.write("recording1.wav", wav, TtsHanlder.FREQ, sampwidth=2)
+        wv.write(fname, wav, TtsHanlder.FREQ, sampwidth=2)
         return wav
         
