@@ -1,4 +1,7 @@
 .venv
+.vscode/
 *.wav
+asset/
 /Data/wavs
 **/__pycache__/
+**/testing_outputs

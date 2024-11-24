@@ -1,0 +1,9 @@
+# Requirements.txt for local development on a Mac/Windows rather than the intended RPi Linux Device
+
+# AudioHandler
+sounddevice
+wavio
+pydub
+
+# TtsHandler
+ChatTTS
