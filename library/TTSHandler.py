@@ -3,7 +3,7 @@ import numpy as np
 import wavio as wv
 
 
-class TtsHanlder:
+class TTSHandler:
     # Default for ChatTTS Library
     FREQ = 24000
 
@@ -13,7 +13,7 @@ class TtsHanlder:
 
     def get_waveform(self, text: str) -> np.ndarray:
         # Apply TTS and get the waveform
-        wav = self.chat.infer(text)
+        wav = self.chat.infer(text + "[uv_break]") # Without the break, the speech feels shortened at the end
 
         # Reshape into the format needed for wavio
         wav = wav.reshape(-1, 1)
@@ -21,6 +21,5 @@ class TtsHanlder:
 
     def save_waveform(self, fname: str, text: str) -> np.ndarray:
         wav = self.get_waveform(text)
-        wv.write(fname, wav, TtsHanlder.FREQ, sampwidth=2)
+        wv.write(fname, wav, TTSHandler.FREQ, sampwidth=2)
         return wav
-        
