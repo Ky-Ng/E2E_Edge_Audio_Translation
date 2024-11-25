@@ -7,3 +7,13 @@ pydub
 
 # TtsHandler
 ChatTTS
+
+# ASR
+transformers
+numpy
+torch
+
+# Translation
+sentencepiece
+
+# TODO Bluetooth handling
