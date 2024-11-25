@@ -1,15 +1,20 @@
-import argparse
-import time
 import sys
 sys.path.append("./library")
 
-from AudioHandler import AudioHandler
-from ASRHandler import ASRHandler
-from TranslationHandler import TranslationHandler
 from TTSHandler import TTSHandler
+from TranslationHandler import TranslationHandler
+from ASRHandler import ASRHandler
+from AudioHandler import AudioHandler
+import argparse
+import time
 
 parser = argparse.ArgumentParser(prog="Test Self Loop End to End")
-parser.add_argument("--language", "-l", type=str, required=True, help="ISO 639 code to output audio in")
+parser.add_argument("--language", "-l",
+                    choices=["zh", "en"], # Support only English and Chinese output
+                    type=str,
+                    required=True,
+                    help="ISO 639 code to output audio in"
+                    )
 
 args = parser.parse_args()
 
@@ -47,7 +52,8 @@ while (user_input != "q"):
     transcription = transcriber.transcribe(fname_in_audio)
 
     # Step 3) Translate Audio to target language if needed
-    translated_transcription = translator.translate(transcription) if target_language != "en" else transcription
+    translated_transcription = translator.translate(
+        transcription) if target_language != "en" else transcription
 
     # Step 4) Synthesize Speech
     tts.save_waveform(fname_out_audio, translated_transcription)
@@ -63,4 +69,3 @@ while (user_input != "q"):
 
     user_input = input(INSTRUCTIONS)
 print("Pipeline closed")
-
