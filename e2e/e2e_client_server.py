@@ -1,7 +1,9 @@
+import sys
+sys.path.append("./library")
 
 import argparse
 import utils.CallBacks
-from utils.BluetoothHandler import BluetoothHandler
+from BluetoothHandler import BluetoothHandler
 
 def main():
     parser = argparse.ArgumentParser()
