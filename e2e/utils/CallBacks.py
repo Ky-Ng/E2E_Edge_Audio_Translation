@@ -17,7 +17,7 @@ translator = None
 tts = TTSHandler()
 
 # Create Temporary Audio Buffers
-OUTPUT_DIR = "./conversation_buffer"  # Added to gitignore
+OUTPUT_DIR = "conversation_buffer"  # Added to gitignore
 AUDIO_IN_BUFFER_NAME = "audio_in_buffer.wav"
 AUDIO_OUT_BUFFER_NAME = "audio_out_buffer.wav"
 
