@@ -1,12 +1,12 @@
+import sys
+sys.path.append("./library")
+
 import os
 from datetime import datetime
 from AudioHandler import AudioHandler
 from ASRHandler import ASRHandler
 from TranslationHandler import TranslationHandler
 from TTSHandler import TTSHandler
-import sys
-sys.path.append("./library")
-
 
 # Initialize Models
 audio_handler = AudioHandler()
