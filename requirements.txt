@@ -12,6 +12,7 @@ bluedot
 torch
 transformers
 datasets
+sentencepiece
 
 # TTS
 ChatTTS

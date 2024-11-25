@@ -1,4 +1,5 @@
 import argparse
+import time
 import sys
 sys.path.append("./library")
 
@@ -19,11 +20,17 @@ print("Starting Self Loop Test")
 
 # Initialize Pipelines
 print("Initializing...", end="")
+start_time = time.time()
+
 audio_handler = AudioHandler()
 transcriber = ASRHandler()
 translator = TranslationHandler(language_iso=target_language)
 tts = TTSHandler()
+
+end_time = time.time()
 print("done!")
+
+print(f"Initialized in {end_time-start_time:.2f} secs")
 
 fname_in_audio = "test_audio_handler.wav"
 fname_out_audio = "playback.wav"
@@ -32,6 +39,9 @@ user_input = input(INSTRUCTIONS)
 while (user_input != "q"):
     # Step 1) Record Audio
     audio_handler.record_audio(fname_in_audio)
+
+    # Performance benchmark, start from transcription
+    start_time = time.time()
 
     # Step 2) Transcribe Audio
     transcription = transcriber.transcribe(fname_in_audio)
@@ -42,9 +52,13 @@ while (user_input != "q"):
     # Step 4) Synthesize Speech
     tts.save_waveform(fname_out_audio, translated_transcription)
 
+    # Performance benchmark, end at audio production
+    end_time = time.time()
+
     # Display outputs
     print(f"Input Text: {transcription}")
     print(f"Output Text: {translated_transcription}")
+    print(f"Elapsed time: {end_time-start_time:2} secs")
     audio_handler.playback_audio(fname_out_audio)
 
     user_input = input(INSTRUCTIONS)
