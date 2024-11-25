@@ -4,16 +4,12 @@ from signal import pause
 
 
 class BluetoothHandler():
-    # MINDY_ADDR = "D8:3A:DD:B5:C2:EB"
-    # Constructor for server
-    def __init__(self, receivedCallbacks, sendingCallback) -> None:
-        self.c = BluetoothServer(self.on_data_received)
-        self.receivedCallbacks = receivedCallbacks
-        self.sendingCallback = sendingCallback
-
     # Constructor for client
-    def __init__(self, receivedCallbacks, sendingCallback, serverMacAddress) -> None:
-        self.c = BluetoothClient(serverMacAddress, self.on_data_received)
+    def __init__(self, receivedCallbacks, sendingCallback, serverMacAddress=None) -> None:
+        if serverMacAddress:
+            self.c = BluetoothClient(serverMacAddress, self.on_data_received)
+        else:
+            self.c = BluetoothServer(self.on_data_received)
         self.receivedCallbacks = receivedCallbacks
         self.sendingCallback = sendingCallback
 
