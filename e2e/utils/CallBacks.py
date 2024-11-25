@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from AudioHandler import AudioHandler
 from ASRHandler import ASRHandler
 from TranslationHandler import TranslationHandler
@@ -26,6 +27,10 @@ AUDIO_OUT_PATH = os.path.join(OUTPUT_DIR, AUDIO_OUT_BUFFER_NAME)
 if os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
+def get_timestamp():
+    formatted_datetime = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    return formatted_datetime
+
 # Input callbacks
 
 
@@ -36,9 +41,9 @@ def get_input_to_english() -> str:
     Input: Any language supported by whisper
     Output: English
     """
-    audio_handler.record_audio(AUDIO_IN_PATH, record_time=5)
+    audio_handler.record_audio(f"{get_timestamp()}{AUDIO_IN_PATH}", record_time=5)
     transcription = transcriber.transcribe(
-        input_wav_file=AUDIO_IN_PATH, output_english=True)
+        input_wav_file=f"{get_timestamp()}{AUDIO_IN_PATH}", output_english=True)
     return transcription
 
 
@@ -77,8 +82,8 @@ def synthesize_speech(str_in: str) -> None:
     """
     Synthesize speech using ChatTTS, generically support any languge ChatTTS supports
     """
-    tts.save_waveform(fname=AUDIO_OUT_PATH, text=str_in)
-    audio_handler.playback_audio(AUDIO_OUT_BUFFER_NAME)
+    tts.save_waveform(fname=f"{get_timestamp()}{AUDIO_OUT_PATH}", text=str_in)
+    audio_handler.playback_audio(f"{get_timestamp()}{AUDIO_OUT_PATH}")
 
 
 def synthesize_speech_english(str_in: str) -> None:
