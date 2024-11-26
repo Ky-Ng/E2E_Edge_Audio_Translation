@@ -1,0 +1,18 @@
+# Audio I/O
+wavio
+scipy
+sounddevice
+pydub
+
+# Communication
+dbus-python
+bluedot
+
+# Models
+torch
+transformers
+datasets
+sentencepiece
+
+# TTS
+ChatTTS
