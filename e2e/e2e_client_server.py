@@ -35,7 +35,7 @@ def main():
     if args.server: # Server
         clientServer = BluetoothHandler(receivingCallback, sendingCallback)
     else:
-        clientServer = BluetoothHandler(receivingCallback, sendingCallback, args.serverMac)
+        clientServer = BluetoothHandler(receivingCallback, sendingCallback, args.client)
 
     clientServer.start()
 
