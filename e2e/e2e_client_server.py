@@ -33,7 +33,6 @@ def main():
 
     # Create client or server
     if args.server: # Server
-        print("aaaaaaaaaaaaaaaaaaaaaa")
         clientServer = BluetoothHandler(receivingCallback, sendingCallback)
     else:
         clientServer = BluetoothHandler(receivingCallback, sendingCallback, args.serverMac)
