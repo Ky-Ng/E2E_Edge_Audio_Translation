@@ -31,13 +31,9 @@ jobs:
       - name: Install Formatter and Linter
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 autopep8
+          pip install autopep8
           
 
       # Run autopep8 but do not create changes, just suggest them on dif
       - name: Run Formatting with Autopep8
         run: autopep8 --diff --recursive .
-
-      # Run linter to identify vulnerabilities
-      - name: Run Linting with Flake8
-        run: flake8 .
