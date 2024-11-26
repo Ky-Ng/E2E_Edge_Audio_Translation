@@ -42,9 +42,10 @@ def get_input_to_english() -> str:
     Output: English
     """
     input("Type enter to begin 5 second recording: ")
-    audio_handler.record_audio(AUDIO_IN_PATH_TEMPLATE.format(get_timestamp()), record_time=5)
+    timestamp = get_timestamp()
+    audio_handler.record_audio(AUDIO_IN_PATH_TEMPLATE.format(timestamp), record_time=5)
     transcription = transcriber.transcribe(
-        input_wav_file=AUDIO_IN_PATH_TEMPLATE.format(get_timestamp()), output_english=True)
+        input_wav_file=AUDIO_IN_PATH_TEMPLATE.format(timestamp), output_english=True)
     return transcription
 
 
@@ -83,8 +84,9 @@ def synthesize_speech(str_in: str) -> None:
     """
     Synthesize speech using ChatTTS, generically support any languge ChatTTS supports
     """
-    tts.save_waveform(fname=AUDIO_OUT_PATH_TEMPLATE.format(get_timestamp()), text=str_in)
-    audio_handler.playback_audio(AUDIO_OUT_PATH_TEMPLATE.format(get_timestamp()))
+    timestamp = get_timestamp()
+    tts.save_waveform(fname=AUDIO_OUT_PATH_TEMPLATE.format(timestamp), text=str_in)
+    audio_handler.playback_audio(AUDIO_OUT_PATH_TEMPLATE.format(timestamp))
 
 
 def synthesize_speech_english(str_in: str) -> None:
