@@ -18,11 +18,11 @@ tts = TTSHandler()
 
 # Create Temporary Audio Buffers
 OUTPUT_DIR = "conversation_buffer"  # Added to gitignore
-AUDIO_IN_BUFFER_NAME = "audio_in_buffer.wav"
-AUDIO_OUT_BUFFER_NAME = "audio_out_buffer.wav"
+AUDIO_IN_BUFFER_NAME = "{}audio_in_buffer.wav"
+AUDIO_OUT_BUFFER_NAME = "{}audio_out_buffer.wav"
 
-AUDIO_IN_PATH = os.path.join(OUTPUT_DIR, AUDIO_IN_BUFFER_NAME)
-AUDIO_OUT_PATH = os.path.join(OUTPUT_DIR, AUDIO_OUT_BUFFER_NAME)
+AUDIO_IN_PATH_TEMPLATE = os.path.join(OUTPUT_DIR, AUDIO_IN_BUFFER_NAME)
+AUDIO_OUT_PATH_TEMPLATE = os.path.join(OUTPUT_DIR, AUDIO_OUT_BUFFER_NAME)
 
 if os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
@@ -41,9 +41,10 @@ def get_input_to_english() -> str:
     Input: Any language supported by whisper
     Output: English
     """
-    audio_handler.record_audio(f"{get_timestamp()}{AUDIO_IN_PATH}", record_time=5)
+    input("Type enter to begin 5 second recording: ")
+    audio_handler.record_audio(AUDIO_IN_PATH_TEMPLATE.format(get_timestamp()), record_time=5)
     transcription = transcriber.transcribe(
-        input_wav_file=f"{get_timestamp()}{AUDIO_IN_PATH}", output_english=True)
+        input_wav_file=AUDIO_IN_PATH_TEMPLATE.format(get_timestamp()), output_english=True)
     return transcription
 
 
@@ -82,8 +83,8 @@ def synthesize_speech(str_in: str) -> None:
     """
     Synthesize speech using ChatTTS, generically support any languge ChatTTS supports
     """
-    tts.save_waveform(fname=f"{get_timestamp()}{AUDIO_OUT_PATH}", text=str_in)
-    audio_handler.playback_audio(f"{get_timestamp()}{AUDIO_OUT_PATH}")
+    tts.save_waveform(fname=AUDIO_OUT_PATH_TEMPLATE.format(get_timestamp()), text=str_in)
+    audio_handler.playback_audio(AUDIO_OUT_PATH_TEMPLATE.format(get_timestamp()))
 
 
 def synthesize_speech_english(str_in: str) -> None:

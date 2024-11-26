@@ -8,12 +8,12 @@ from BluetoothHandler import BluetoothHandler
 def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-i", help="flag indicating if should initiate as a server",
+    group.add_argument("-server", help="flag indicating if it should initiate as a server",
                     action="store_true")
-    group.add_argument("--serverMac", help='MAC address of the server for bluetooth connection', type=str)
+    group.add_argument("--client", help='Indicates client mode and accepts the MAC address of the server for bluetooth connection as an argument', type=str)
 
-    parser.add_argument('--nativeLanguage', choices=['en', 'ch', 'terminal'], required=True)
-    parser.add_argument('-v', '--verbose', default=False)
+    parser.add_argument('--nativeLanguage', "-l", choices=['en', 'ch', 'terminal'], required=True)
+    parser.add_argument('-v', '--verbose', action="store_true")
     args = parser.parse_args()
 
     # Create callbacks based on language
@@ -32,7 +32,8 @@ def main():
         receivingCallback.append(utils.CallBacks.print_input)
 
     # Create client or server
-    if args.serverMac is None: # Server
+    if args.server: # Server
+        print("aaaaaaaaaaaaaaaaaaaaaa")
         clientServer = BluetoothHandler(receivingCallback, sendingCallback)
     else:
         clientServer = BluetoothHandler(receivingCallback, sendingCallback, args.serverMac)
