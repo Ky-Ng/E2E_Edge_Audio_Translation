@@ -24,7 +24,7 @@ AUDIO_OUT_BUFFER_NAME = "{}audio_out_buffer.wav"
 AUDIO_IN_PATH_TEMPLATE = os.path.join(OUTPUT_DIR, AUDIO_IN_BUFFER_NAME)
 AUDIO_OUT_PATH_TEMPLATE = os.path.join(OUTPUT_DIR, AUDIO_OUT_BUFFER_NAME)
 
-if os.path.exists(OUTPUT_DIR):
+if not os.path.exists(OUTPUT_DIR):
     os.makedirs(OUTPUT_DIR)
 
 def get_timestamp():
