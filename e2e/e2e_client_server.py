@@ -18,14 +18,18 @@ def main():
 
     # Create callbacks based on language
     if args.nativeLanguage == 'en':
-        sendingCallback = utils.CallBacks.get_input_to_english
+        sendingCallback = [utils.CallBacks.get_input_to_english]
         receivingCallback = [utils.CallBacks.synthesize_speech_english]
     elif args.nativeLanguage == 'ch':
-        sendingCallback = utils.CallBacks.getInputFromChinese
+        sendingCallback = [utils.CallBacks.getInputFromChinese]
         receivingCallback = [utils.CallBacks.outputInputChinese]
     else:
-        sendingCallback = utils.CallBacks.getInputFromTerminal
+        sendingCallback = [utils.CallBacks.getInputFromTerminal]
         receivingCallback = [utils.CallBacks.print_input]
+
+    # Add logging callback
+    sendingCallback.append(utils.CallBacks.log_to_transcript)
+    receivingCallback.append(utils.CallBacks.log_to_transcript)
 
     # Add print callback if verbose
     if args.verbose and args.nativeLanguage != 'terminal':

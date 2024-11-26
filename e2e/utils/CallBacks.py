@@ -7,6 +7,9 @@ from AudioHandler import AudioHandler
 from ASRHandler import ASRHandler
 from TranslationHandler import TranslationHandler
 from TTSHandler import TTSHandler
+import json
+
+log = []
 
 # Initialize Models
 audio_handler = AudioHandler()
@@ -34,7 +37,7 @@ def get_timestamp():
 # Input callbacks
 
 
-def get_input_to_english() -> str:
+def get_input_to_english(str_in=None) -> str:
     """
     Record audio and output English
 
@@ -49,7 +52,7 @@ def get_input_to_english() -> str:
     return transcription
 
 
-def getInputFromChinese() -> str:
+def getInputFromChinese(str_in=None) -> str:
     """
     Record audio and output English
 
@@ -63,7 +66,7 @@ def getInputFromChinese() -> str:
     return translated_transcription
 
 
-def getInputFromTerminal() -> str:
+def getInputFromTerminal(str_in=None) -> str:
     """
     Debug mode
     """
@@ -71,7 +74,11 @@ def getInputFromTerminal() -> str:
     return text
 
 # Output callbacks
-
+def log_to_transcript(str_in: str) -> None:
+    global log
+    log.append(str_in)
+    with open("transcript.json", 'w') as ofile:
+        json.dump(log, ofile)
 
 def print_input(str_in: str) -> None:
     """

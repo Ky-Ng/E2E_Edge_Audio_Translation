@@ -24,4 +24,9 @@ class BluetoothHandler():
     # Infinite loop of sending to partner
     def start(self) -> None:
         while True:
-            self.send(self.sendingCallback())
+            finalMsg = None # Should be overwritten
+            for callback in self.sendingCallback:
+                msg = callback(finalMsg)
+                if msg:
+                    finalMsg = msg
+            self.send(finalMsg)

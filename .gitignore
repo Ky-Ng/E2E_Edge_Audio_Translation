@@ -6,3 +6,4 @@ asset/
 **/__pycache__/
 **/testing_outputs
 **/conversation_buffer
+*.json
