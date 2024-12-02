@@ -16,3 +16,6 @@ sentencepiece
 
 # TTS
 ChatTTS
+
+# Visualization
+flask

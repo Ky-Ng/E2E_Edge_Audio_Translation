@@ -16,4 +16,7 @@ torch
 # Translation
 sentencepiece
 
+# Visualization
+flask
+
 # TODO Bluetooth handling
