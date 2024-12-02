@@ -16,4 +16,5 @@ torch
 # Translation
 sentencepiece
 
-# TODO Bluetooth handling
+# IoT Node to Node Communication
+paho-mqtt
