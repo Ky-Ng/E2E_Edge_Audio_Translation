@@ -59,6 +59,7 @@ def getInputFromChinese(str_in=None) -> str:
     Input: Any language supported by whisper
     Output: Mandarin Chinese
     """
+    global translator
     english_transcription = get_input_to_english()
     if not translator:
         translator = TranslationHandler(language_iso="zh")
