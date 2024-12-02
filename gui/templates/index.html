@@ -1,0 +1,48 @@
+<!-- https://www.geeksforgeeks.org/templating-with-jinja2-in-flask/ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>For Example</title>
+    <style>
+        .container-row {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .flex-child {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <h2> Real-Time End-to-End  IoT Edge Translation (REIET) Transcript Visualization</h2>
+    {% for message in messages%}
+    <div class="container-row">
+        {% if loop.index is odd %}
+        <div class="column flex-child">
+            <p class="flex-child"> {{message}} </p>
+        </div>
+        <div class="column flex-child">
+            <p></p>
+        </div>
+        {% else %}
+        <div class="column flex-child">
+            <p></p>
+        </div>
+        <div class="column flex-child">
+            <p class="flex-child" align="right"> {{message}} </p>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</body>
+
+</html>
