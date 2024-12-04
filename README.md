@@ -49,7 +49,8 @@ With the innovation in Natural Language Processing (NLP), we seek to bridge the 
 	2. Paho-MQTT
 	3. Wavio + Sounddevice
 ### Pipeline
-![REIET E2E Pipeline Image](assets/pipeline.png)
+![REIET E2E Pipeline Image](assets/E2E_Translation_Flowchart.png)
+For full writeup checkout: [tinyurl.com/REIET-writeup](https://tinyurl.com/REIET-writeup)
 
 <small>The flowchart above shows the pipeline from Listener RPi to Speaker RPi. Since both RPi's are both Listeners and Speakers, the pipeline is replicated symmetrically and bidirectionally</small>
 
