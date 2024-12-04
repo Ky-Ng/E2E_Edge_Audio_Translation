@@ -16,7 +16,8 @@ torch
 # Translation
 sentencepiece
 
+# IoT Node to Node Communication
+paho-mqtt
+
 # Visualization
 flask
-
-# TODO Bluetooth handling
