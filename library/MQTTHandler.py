@@ -72,7 +72,6 @@ class MQTTHandler():
         msg_str = json.dumps(message)
 
         # Send over MQTT
-        print("sending", self.topic, msg_str)
         self.client.publish(self.topic, msg_str)
 
     # Infinite loop of sending to partner
