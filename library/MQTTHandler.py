@@ -6,16 +6,16 @@ import time
 class MQTTHandler():
     TOPIC_NAMESPACE = "o_of_ng_e2e_translation"
     DEFAULT_TOPIC = "e2e_default_topic"
-
     MQTT_SERVER_URL = "mqtt.eclipseprojects.io"
+
     MQTT_SERVER_PORT = 1883
     MQTT_KEEP_ALIVE_TIME_IN_SEC = 60
 
     # Constructor for client
-    def __init__(self, receivedCallbacks, sendingCallback, topic_namespace=TOPIC_NAMESPACE, topic=DEFAULT_TOPIC) -> None:
+    def __init__(self, receivedCallbacks, sendingCallback, topic_namespace=TOPIC_NAMESPACE, topic_name=DEFAULT_TOPIC) -> None:
         """
         Create an MQTT client which is both a subscriber and publisher to the 
-        "MQTTHandler.TOPIC_NAMESPACE/topic" topic.
+        "topic_namespace/topic_name" topic.
 
         In order to avoid echoing a message we send out, we will drop any received MQTT messages
         with our process ID.
@@ -26,7 +26,7 @@ class MQTTHandler():
             1 - p(no collision) = 1 - (1 * 2^32-1/2^32)
         """
         self.uid = f"{os.getpid()}_{time.time()}"
-        self.topic = f"{topic_namespace}/{topic}"
+        self.topic = f"{topic_namespace}/{topic_name}"
         self.receivedCallbacks = receivedCallbacks
         self.sendingCallback = sendingCallback
 
@@ -41,31 +41,25 @@ class MQTTHandler():
         
         # Subscribe and create receive callbacks
         self.client.on_connect = self.on_connect
-        # TODO figure out with jonathan on the implementation of on_data_received
         self.client.on_message = self.on_data_received
     
     def __del__(self):
         # Cleanup MQTT client
         self.client.loop_stop()
     
-    # @client.topic_callback(target_topic)
     def on_data_received(self, client, userdata, msg):
-        
+        # Parse Payload
         json_payload = json.loads(str(msg.payload, 'utf-8'))
         data = json_payload["msg"]
         msg_uid = json_payload["uid"]
+
+        # Remove Self Check
         if msg_uid == self.uid:
             return
-        print(f"Received: {str(msg.payload, 'utf-8')}")
-        print(data)
-
+        
+        # Handle Callbacks
         for callback in self.receivedCallbacks:
             callback(data)
-
-    # On data receipt, pass through all call backs
-    # def on_data_received(self, data):
-    #     for callback in self.receivedCallbacks:
-    #         callback(data)
 
     def send(self, msg: str) -> None:
         # Prepare message
