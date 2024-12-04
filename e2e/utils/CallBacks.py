@@ -57,13 +57,10 @@ def getInputFromChinese(str_in=None) -> str:
     Record audio and output English
 
     Input: Any language supported by whisper
-    Output: Mandarin Chinese
+    Output: English Text (we want to use English as the lingua franca between RPis)
     """
     english_transcription = get_input_to_english()
-    if not translator:
-        translator = TranslationHandler(language_iso="zh")
-    translated_transcription = translator.translate(english_transcription)
-    return translated_transcription
+    return english_transcription
 
 
 def getInputFromTerminal(str_in=None) -> str:
@@ -106,5 +103,14 @@ def synthesize_speech_english(str_in: str) -> None:
 def outputInputChinese(str_in: str) -> None:
     """
     Synthesizes Mandarin Chinese Speech
+
+    Input: English Text (will be translated to Mandarin Chinese Text)
+    Output: Mandarin Chinese Speech
     """
-    synthesize_speech(str_in=str_in)
+    global translator
+
+    if not translator:
+        translator = TranslationHandler(language_iso="zh")
+
+    translated_transcription = translator.translate(str_in)
+    synthesize_speech(str_in=translated_transcription)

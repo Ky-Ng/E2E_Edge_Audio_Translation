@@ -1,26 +1,28 @@
+import argparse
 import sys
 sys.path.append("./library")
 
-import argparse
-import utils.CallBacks
 from BluetoothHandler import BluetoothHandler
+import utils.CallBacks
 
 def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-server", help="flag indicating if it should initiate as a server",
-                    action="store_true")
-    group.add_argument("--client", help='Indicates client mode and accepts the MAC address of the server for bluetooth connection as an argument', type=str)
+    group.add_argument(
+        "--server", "-s", help="flag indicating if it should initiate as a server", action="store_true")
+    group.add_argument(
+        "--client", "-c", help='Indicates client mode and accepts the MAC address of the server for bluetooth connection as an argument', type=str)
 
-    parser.add_argument('--nativeLanguage', "-l", choices=['en', 'ch', 'terminal'], required=True)
-    parser.add_argument('-v', '--verbose', action="store_true")
+    parser.add_argument('--nativeLanguage', "-l",
+                        choices=['en', 'zh', 'terminal'], required=True)
+    parser.add_argument('--verbose', '-v', action="store_true")
     args = parser.parse_args()
 
     # Create callbacks based on language
     if args.nativeLanguage == 'en':
         sendingCallback = [utils.CallBacks.get_input_to_english]
         receivingCallback = [utils.CallBacks.synthesize_speech_english]
-    elif args.nativeLanguage == 'ch':
+    elif args.nativeLanguage == 'zh':
         sendingCallback = [utils.CallBacks.getInputFromChinese]
         receivingCallback = [utils.CallBacks.outputInputChinese]
     else:
@@ -36,12 +38,14 @@ def main():
         receivingCallback.append(utils.CallBacks.print_input)
 
     # Create client or server
-    if args.server: # Server
+    if args.server:  # Server
         clientServer = BluetoothHandler(receivingCallback, sendingCallback)
     else:
-        clientServer = BluetoothHandler(receivingCallback, sendingCallback, args.client)
+        clientServer = BluetoothHandler(
+            receivingCallback, sendingCallback, args.client)
 
     clientServer.start()
+
 
 if __name__ == '__main__':
     main()
