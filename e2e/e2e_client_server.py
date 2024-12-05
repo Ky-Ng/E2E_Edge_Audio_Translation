@@ -7,6 +7,7 @@ import utils.CallBacks
 
 def main():
     parser = argparse.ArgumentParser()
+
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
         "--server", "-s", help="flag indicating if it should initiate as a server", action="store_true")
@@ -14,8 +15,10 @@ def main():
         "--client", "-c", help='Indicates client mode and accepts the MAC address of the server for bluetooth connection as an argument', type=str)
 
     parser.add_argument('--nativeLanguage', "-l",
-                        choices=['en', 'zh', 'terminal'], required=True)
-    parser.add_argument('--verbose', '-v', action="store_true")
+                        choices=['en', 'zh', 'terminal'], required=True, help="ISO 639 code of language to translate audio output to")
+    parser.add_argument('--verbose', '-v', action="store_true",
+                        help="Verbose debugging mode")
+    
     args = parser.parse_args()
 
     # Create callbacks based on language

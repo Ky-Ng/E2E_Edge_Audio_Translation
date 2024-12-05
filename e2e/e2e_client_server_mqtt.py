@@ -1,17 +1,21 @@
+import argparse
 import sys
 sys.path.append("./library")
 
-import argparse
-from MQTTHandler import MQTTHandler
 import utils.CallBacks
+from MQTTHandler import MQTTHandler
+
 
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--topic_name', "-t", default=MQTTHandler.DEFAULT_TOPIC)
+    parser.add_argument('--topic_name', "-t", default=MQTTHandler.DEFAULT_TOPIC,
+                        help="Topic Name for MQTT nodes to publish and subscribe to. Similar to a chatroom name.")
     parser.add_argument('--nativeLanguage', "-l",
-                        choices=['en', 'zh', 'terminal'], required=True)
-    parser.add_argument('--verbose', '-v', action="store_true")
+                        choices=['en', 'zh', 'terminal'], required=True, help="ISO 639 code of language to translate audio output to")
+    parser.add_argument('--verbose', '-v', action="store_true",
+                        help="Verbose debugging mode")
+    
     args = parser.parse_args()
 
     # Create callbacks based on language
@@ -33,7 +37,8 @@ def main():
     if args.verbose and args.nativeLanguage != 'terminal':
         receivingCallback.append(utils.CallBacks.print_input)
 
-    mqttClient = MQTTHandler(receivingCallback, sendingCallback, topic_name=args.topic_name)
+    mqttClient = MQTTHandler(
+        receivingCallback, sendingCallback, topic_name=args.topic_name)
 
     mqttClient.start()
 
