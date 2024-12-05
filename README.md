@@ -27,7 +27,9 @@ ___
    - [Translation Handler](#translation-handler)
    - [TTS Handler](#tts-handler)
    - [Self Loop](#self-loop-recording--asr--translation--tts)
-7. [How to Contribute](#how-to-contribute)
+   - [MQTT Handler](#mqtt-handler)
+   - [Bluetooth Handler](#bluetooth-handler)
+1. [How to Contribute](#how-to-contribute)
 
 ___
 ## Introduction
@@ -193,6 +195,25 @@ python testing/testTTSHandler.py -t "what is the meaning of life"
 
 # ex:
 python e2e/test_self_loop.py -l zh
+```
+
+#### MQTT Handler
+- Run the MQTT Client in two terminals/IoT devices to send the "testing class" msg
+	- Note: there is an infinite loop in order to allow the MQTT publisher to complete its `send` execution
+```bash
+python3 e2e/testMQTTHandlerClass
+```
+
+#### Bluetooth Handler
+- Note: you will need to find the MAC address of your `Server` device and place it into `e2e/testBluetoothClient.py`
+Run Server:
+```
+python3 e2e/testBluetoothServer.py
+```
+
+Run Client:
+```
+python3 e2e/testBluetoothClient.py
 ```
 ___
 ## How to Contribute
