@@ -1,4 +1,5 @@
 # Real-Time End-to-End  IoT Edge Translation (REIET)
+[![Demo Video](assets/Demo.png)](https://youtu.be/b30KwzEInOY)
 ___
 ## Table of Contents
 1. [Introduction](#introduction)
